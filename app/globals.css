@@ -1,0 +1,124 @@
+body {
+  background-color: #212529 !important;
+}
+.container {
+  margin: 0 !important;
+  min-width: 100% !important;
+}
+.board-col {
+  display: flex;
+  justify-content: center;
+  min-width: 526px;
+  max-width: 626px;
+}
+.board {
+  /* width: fit-content !important;
+  height: max-content; */
+  padding: 5px !important;
+  background-color: #319628;
+  border-radius: 5px;
+  margin-top: 5rem;
+}
+tbody {
+  display: block;
+  border: 2px solid !important;
+  border-color: black !important;
+}
+tr, td {
+  display: flex;
+}
+.cell {
+  padding: 0;
+  width: 64px;
+  height: 64px;
+  justify-content: center;
+  border: 2px solid;
+  border-color: black;
+  align-items: center;
+}
+.black {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  justify-content: center;
+  background-color: black;
+}
+.white {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  justify-content: center;
+  background-color: white;
+}
+
+.white-hover {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  justify-content: center;
+  background-color: white;
+  opacity: 40%;
+}
+.black-hover {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  justify-content: center;
+  background-color: black;
+  opacity: 40%;
+}
+
+.scores-col {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 !important;
+  margin-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: calc(var(--bs-gutter-x) * .5);
+}
+.black-score-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.white-score-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.white-scorecard {
+  max-height: calc(526px / 2);
+  width: inherit;
+}
+.black-scorecard {
+  margin-top: 5rem;
+  max-height: calc(526px / 2);
+  top: 0 !important;
+}
+.controls-col {
+  display: flex;
+  padding: 0 !important;
+  margin-right: calc(var(--bs-gutter-x) * .5);
+  margin-left: calc(var(--bs-gutter-x) * .5);
+}
+.controls-card {
+  width: 100% !important;
+  bottom: 0 !important;
+  margin-top: 5rem;
+  max-height: 526px; /* size of board */
+}
+.card {
+  display: flex;
+  flex-flow: column;
+}
+.card-body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+}
+.card-body::-webkit-scrollbar {
+  display: none;
+}
+.tab {
+  text-indent: 10%;
+}
