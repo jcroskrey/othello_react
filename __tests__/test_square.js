@@ -9,7 +9,10 @@ test("Tests null square renders empty", () => {
         <table>
             <tbody>
                 <tr>
-                    <Square value={null} testID={'0_0'}/>
+                    <Square 
+                      value={''} 
+                      testID={'0_0'}
+                    />
                 </tr>
             </tbody>
         </table>
@@ -19,12 +22,15 @@ test("Tests null square renders empty", () => {
     expect(square.firstChild).not.toHaveClass('black');
 });
 
-test("Test Square with value===white has classname===white", () => {
+test("Test square with value==white has classname==white", () => {
     render(
         <table>
             <tbody>
                 <tr>
-                    <Square value={'white'} testID={'0_0'}/>
+                    <Square 
+                      value={'white'} 
+                      testID={'0_0'}
+                    />
                 </tr>
             </tbody>
         </table>
@@ -34,7 +40,7 @@ test("Test Square with value===white has classname===white", () => {
     expect(square.firstChild).not.toHaveClass('black');
 });
 
-test("Square click handler called", async () => {
+test("Test square click handler called", async () => {
     const user = userEvent.setup();
     const mockHandleClick = jest.fn();
     render(
@@ -42,7 +48,7 @@ test("Square click handler called", async () => {
             <tbody>
                 <tr>
                     <Square 
-                      value={null} 
+                      value={''} 
                       testID='0_0'
                       onSquareClick={mockHandleClick}
                     />
@@ -54,14 +60,14 @@ test("Square click handler called", async () => {
     expect(mockHandleClick).toHaveBeenCalled();
 });
 
-test("Square hovered has shadow tile classname", async () => {
+test("Test empty square hovered has shadow tile classname", async () => {
     const user = userEvent.setup();
     render(
         <table>
             <tbody>
                 <tr>
                     <Square 
-                    value={null}
+                    value={''}
                     onSquareClick={null}
                     whiteIsNext={true}
                     testID='0_0'
@@ -72,5 +78,31 @@ test("Square hovered has shadow tile classname", async () => {
     );
     const square = screen.getByTestId('0_0');
     await user.hover(square);
-    // TODO: NOT DONE
+    expect(square.firstChild).toHaveClass('white-hover');
+    await user.unhover(square);
+    expect(square.firstChild).not.toHaveClass('white-hover');
 });
+
+test("Test square with tile hovered returns", async () => {
+    const user = userEvent.setup();
+    render(
+        <table>
+            <tbody>
+                <tr>
+                    <Square 
+                    value={'black'}
+                    onSquareClick={null}
+                    whiteIsNext={true}
+                    testID='0_0'
+                    />
+                </tr>
+            </tbody>
+        </table>
+    );
+    const square = screen.getByTestId('0_0');
+    await user.hover(square);
+    expect(square.firstChild).toHaveClass('black');
+    expect(square.firstChild).not.toHaveClass('black-hover');
+    await user.unhover(square);
+    expect(square.firstChild).toHaveClass('black');
+})
