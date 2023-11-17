@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Square = ({value, onSquareClick, whiteIsNext, testID}) => {
+export const Square = ({value, onSquareClick, whiteIsNext, testId}) => {
     const [hoverValue, setHoverValue] = useState('');
 
     function handleMouseEnter() {
@@ -29,7 +29,7 @@ export const Square = ({value, onSquareClick, whiteIsNext, testID}) => {
 
     return (
         <td 
-          data-testid={testID}
+          data-testid={testId}
           className={'cell'} 
           onClick={onSquareClick} 
           onMouseEnter={() => handleMouseEnter()}

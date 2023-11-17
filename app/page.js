@@ -105,18 +105,13 @@ export default function Game() {
           
         </Col>
         <Col className="board-col" md={4} lg={3} xl={2} >
-          <div className={"board"}>
-            <table>
-              <tbody>
-                <Board 
-                key={currentMove}
-                currentGrid={currentGrid.slice().map(r => r.slice())} 
-                whiteIsNext={whiteIsNext} 
-                onPlay={handlePlay}
-                />
-              </tbody>
-            </table>
-          </div>
+          <Board 
+          key={currentMove}
+          currentGrid={currentGrid.slice().map(r => r.slice())} 
+          whiteIsNext={whiteIsNext} 
+          onPlay={handlePlay}
+          testId={'game_board'}
+          />
         </Col>
         <Col className="controls-col">
           <ControlsCard 
