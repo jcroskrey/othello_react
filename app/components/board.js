@@ -12,16 +12,9 @@ export const Board = ({currentGrid, whiteIsNext, onPlay, testId}) => {
       }
       let toWhite;
       let toBlack;
-      if (whiteIsNext) {
-          nextGrid[row][col] = 0;
-          toWhite = validFlips.length;
-          toBlack = -validFlips.length;
-      }
-      else {
-          nextGrid[row][col] = 1;
-          toWhite = -validFlips.length;
-          toBlack = validFlips.length;
-      }
+      nextGrid[row][col] = whiteIsNext ? 0 : 1;
+      toWhite = whiteIsNext ? validFlips.length : -validFlips.length;
+      toBlack = whiteIsNext ? -validFlips.length: validFlips.length;
       makeFlips(nextGrid, validFlips);
       onPlay(nextGrid, toWhite, toBlack);
   }
@@ -56,12 +49,8 @@ export const Board = ({currentGrid, whiteIsNext, onPlay, testId}) => {
 };
 
 function findValidFlips(grid, row, col, whiteIsNext) {
-  let checkVal = 1;
-  let currVal = 0;
-  if (!whiteIsNext) {
-    checkVal = 0;
-    currVal = 1;
-  }
+  let checkVal = whiteIsNext ? 1 : 0;
+  let currVal = whiteIsNext ? 0 : 1;
   const directions = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [-1, -1], [1, -1], [-1, 1]];
   var validFlips = []; // directions where a neighbor is present
   for (let i = 0; i < directions.length; i++) {

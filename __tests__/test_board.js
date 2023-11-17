@@ -3,7 +3,6 @@ import '@testing-library/user-event';
 import { render, screen } from "@testing-library/react";
 import { userEvent } from '@testing-library/user-event';
 import { Board } from '@/app/components/board';
-import { experimental } from '@/next.config';
 
 
 const generateEmptyGrid = (n) => {
@@ -62,7 +61,30 @@ test("Test clicking filled square does nothing", async () => {
     expect(targetSquare.firstChild).not.toHaveClass('white');
 });
 
-test("Test valid white move makes flips in all directions", async () => {
+test("Test valid black move flips to black", async() => {
+    const user = userEvent.setup();
+    const startingGrid = [
+        [1, 0, null]
+    ]
+    const mockOnPlay = jest.fn();
+    render(
+        <Board
+          currentGrid={startingGrid}
+          whiteIsNext={false}
+          onPlay={mockOnPlay}
+          testId={'game_board'}
+        />
+    );
+    const targetSquare = screen.getByTestId('0_2');
+    await user.click(targetSquare);
+    expect(mockOnPlay).toHaveBeenCalledWith(
+        [[1, 1, 1]],
+        -1, 
+        1
+    )
+});
+
+test("Test valid move makes flips in all directions", async () => {
     const user = userEvent.setup();
     const startingGrid = [
         [0, null, 0, null, 0],
@@ -95,12 +117,12 @@ test("Test valid white move makes flips in all directions", async () => {
     expect(mockOnPlay).toHaveBeenCalledWith(expectedNextGrid, expectedToWhite, expectedToBlack);
 });
 
-test("Test black move only flips in only valid directions", async () => {
+test("Test move only flips in only valid directions", async () => {
     const user = userEvent.setup();
     const startingGrid = [
-        [1, null, null, null, null],
-        [null, 0, 0, 0, null], 
-        [1, 0, null, 0, null],
+        [0, null, null, null, null],
+        [null, 1, 1, 1, null], 
+        [0, 1, null, 1, null],
         [null, null, null, null, null],
         [null, null, null, null, null]
     ]
@@ -108,21 +130,21 @@ test("Test black move only flips in only valid directions", async () => {
     render(
         <Board
           currentGrid={startingGrid}
-          whiteIsNext={false}
+          whiteIsNext={true}
           onPlay={mockOnPlay}
           testId={'game_board'}
         />
     );
     await user.click(screen.getByTestId("2_2"));
     const expectedNextGrid = [
-        [1, null, null, null, null],
-        [null, 1, 0, 0, null],
-        [1, 1, 1, 0, null],
+        [0, null, null, null, null],
+        [null, 0, 1, 1, null],
+        [0, 0, 0, 1, null],
         [null, null, null, null, null],
         [null, null, null, null, null]
     ]
-    const expectedToWhite = -2;
-    const expectedToBlack = 2;
+    const expectedToWhite = 2;
+    const expectedToBlack = -2;
     expect(mockOnPlay).toHaveBeenCalledWith(expectedNextGrid, expectedToWhite, expectedToBlack);
 });
 
