@@ -11,7 +11,7 @@ test("Tests null square renders empty", () => {
                 <tr>
                     <Square 
                       value={''} 
-                      testID={'0_0'}
+                      testId={'0_0'}
                     />
                 </tr>
             </tbody>
@@ -29,7 +29,7 @@ test("Test square with value==white has classname==white", () => {
                 <tr>
                     <Square 
                       value={'white'} 
-                      testID={'0_0'}
+                      testId={'0_0'}
                     />
                 </tr>
             </tbody>
@@ -49,7 +49,7 @@ test("Test square click handler called", async () => {
                 <tr>
                     <Square 
                       value={''} 
-                      testID='0_0'
+                      testId='0_0'
                       onSquareClick={mockHandleClick}
                     />
                 </tr>
@@ -70,7 +70,7 @@ test("Test empty square hovered has shadow tile classname", async () => {
                     value={''}
                     onSquareClick={null}
                     whiteIsNext={true}
-                    testID='0_0'
+                    testId='0_0'
                     />
                 </tr>
             </tbody>
@@ -93,7 +93,7 @@ test("Test square with tile hovered returns", async () => {
                     value={'black'}
                     onSquareClick={null}
                     whiteIsNext={true}
-                    testID='0_0'
+                    testId='0_0'
                     />
                 </tr>
             </tbody>
