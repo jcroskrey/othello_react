@@ -86,6 +86,7 @@ export default function Game() {
                 validMoveAvailable={validMoveAvailable}
                 forfeitTurn={() => forfeitTurn()}
                 winner={winner}
+                testId={'black_scorecard'}
               />
             </Col>
           </Row>
@@ -99,6 +100,7 @@ export default function Game() {
                 validMoveAvailable={validMoveAvailable}
                 forfeitTurn={() => forfeitTurn()}
                 winner={winner}
+                testId={'white_scorecard'}
               />
             </Col>
           </Row>
