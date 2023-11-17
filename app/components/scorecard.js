@@ -53,7 +53,7 @@ export default function ScoreCard({
         turnOutline = 'danger';
     }
     else if (winner === 'tie') {
-        bodyText = 'Tie! Another round so glory can finally be awarded?';
+        bodyText = 'Tie! Another round so glory can be awarded?';
         buttonInvisible = 'invisible';
         turnOutline = 'info';
     }
