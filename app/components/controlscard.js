@@ -4,16 +4,16 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col";
 
 
-export default function ControlsCard({currentMove, goToMove, winner}) {
+export default function ControlsCard({currentMove, goToMove, winner, testId}) {
 
-    let undoDisabled = 'enabled';
+    let undoDisabled = false;
     if (winner != null || currentMove === 0) {
-        undoDisabled = 'disabled';
+        undoDisabled = true;
     }
 
-    let resetDisabled = 'enabled';
+    let resetDisabled = false;
     if (currentMove === 0) {
-        resetDisabled = 'disabled';
+        resetDisabled = true;
     }
 
     function handleClick(resetOrUndo) {
@@ -26,7 +26,7 @@ export default function ControlsCard({currentMove, goToMove, winner}) {
     }
 
     return (
-        <Card className="controls-card" key='controlscard'>
+        <Card className="controls-card" key='controlscard' data-testid={testId}>
             <Card.Header className="text-center">
                 <h4>Salutations Pupils!</h4>
             </Card.Header>
@@ -49,7 +49,7 @@ export default function ControlsCard({currentMove, goToMove, winner}) {
                     <Col>
                         <div className="d-grid">
                            <Button 
-                           className={undoDisabled}
+                           disabled={undoDisabled}
                            variant="outline-info"
                            onClick={() => handleClick('undo')}
                            >
@@ -60,7 +60,7 @@ export default function ControlsCard({currentMove, goToMove, winner}) {
                     <Col>
                         <div className="d-grid">
                             <Button 
-                            className={resetDisabled}
+                            disabled={resetDisabled}
                             variant="outline-info"
                             onClick={() => handleClick('reset')}
                             >

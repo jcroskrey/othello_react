@@ -120,6 +120,7 @@ export default function Game() {
           currentMove={currentMove}
           goToMove={jumpTo}
           winner={winner}
+          testId={'controls_card'}
           />
         </Col>
       </Row>
