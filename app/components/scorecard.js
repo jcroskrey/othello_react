@@ -2,7 +2,15 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 
-export default function ScoreCard({team, score, whiteIsNext, validMoveAvailable, forfeitTurn, winner}) {
+export default function ScoreCard({
+    team, 
+    score, 
+    whiteIsNext, 
+    validMoveAvailable, 
+    forfeitTurn,
+    winner,
+    testId
+    }) {
 
     let styling = 'text-center ' + team.toLowerCase() + '-scorecard';
 
@@ -25,7 +33,7 @@ export default function ScoreCard({team, score, whiteIsNext, validMoveAvailable,
     else if ((validMoveAvailable && team.toLowerCase() === 'white' && whiteIsNext) ||
              (validMoveAvailable && team.toLowerCase() === 'black' && !whiteIsNext))  {
         // if it's your turn, and you have a play available display this text
-        bodyText = 'Inch closer to victory with each expertly placed move, pupil.'
+        bodyText = 'Make a brilliant move, pupil!'
     }
 
     let teamNameText = team;
@@ -51,7 +59,7 @@ export default function ScoreCard({team, score, whiteIsNext, validMoveAvailable,
     }
     
     return (
-        <Card border={turnOutline} className={styling}>
+        <Card border={turnOutline} className={styling} data-testid={testId}>
             <Card.Header className="text-center">
                 <h4>{teamNameText}</h4>
             </Card.Header>
