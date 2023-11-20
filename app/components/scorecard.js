@@ -68,7 +68,12 @@ export default function ScoreCard({
                 <span className="text-secondary">{bodyText}</span>
             </Card.Body>
             <Card.Footer className="text-center">
-                <Button variant='outline-info' className={buttonInvisible} onClick={() => forfeitTurn()}>Forfeit Turn</Button>
+                <Button 
+                variant='outline-info' 
+                className={buttonInvisible} 
+                onClick={() => forfeitTurn()}
+                data-testid={team.toLowerCase() + '_forfeit_button'}
+                >Forfeit Turn</Button>
             </Card.Footer>
         </Card>
     );

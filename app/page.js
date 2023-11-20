@@ -1,6 +1,6 @@
 "use client";
 import { Board } from "./components/board";
-import { useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,21 +8,33 @@ import ScoreCard from "./components/scorecard";
 import ControlsCard from "./components/controlscard";
 
 // create the starting grid
-const initialGrid = Array(8).fill().map(() => Array(8).fill(null));
+let initialGrid = Array(8).fill().map(() => Array(8).fill(null));
 initialGrid[3][3] = 0;   // 0 is white
 initialGrid[3][4] = 1;   // 1 is black
 initialGrid[4][3] = 1;
 initialGrid[4][4] = 0;
 
 
-export default function Game() {
+export default function Game({optionalInitialGrid, optionalStartingMove}) {
+  if (optionalInitialGrid) {
+    // optionalInitialGrid is for testing purposes only.
+    // This variable allows us to pass a starting grid to the 
+    // game component and test the component from any defined 
+    // board (grid) configuration. 
+    initialGrid = optionalInitialGrid;
+  }
+  let startingMove = 0;
+  if (optionalStartingMove) {
+    // This is for testing purposes only
+    startingMove = optionalStartingMove;
+  }
   // fill grid with null values (blank spaces)
-  const [history, setHistory] = useState([initialGrid]);  // save a history of each grid
-  const [currentMove, setCurrentMove] = useState(0);
-  const [whiteScores, setWhiteScores] = useState([2]);
-  const [blackScores, setBlackScores] = useState([2]);
-  const [validMoveAvailable, setValidMoveAvailable] = useState(true);
-  const [winner, setWinner] = useState(null);
+  const [history, setHistory] = React.useState([initialGrid]);  // save a history of each grid
+  const [currentMove, setCurrentMove] = React.useState(startingMove);
+  const [whiteScores, setWhiteScores] = React.useState([2]);
+  const [blackScores, setBlackScores] = React.useState([2]);
+  const [validMoveAvailable, setValidMoveAvailable] = React.useState(true);
+  const [winner, setWinner] = React.useState(null);
 
   const whiteIsNext = currentMove % 2 === 1; // black starts first
   const currentGrid = history[history.length - 1];
@@ -33,12 +45,15 @@ export default function Game() {
   function handlePlay(nextSquares, toWhite, toBlack) {
     const nextHistory = [...history.map(g => g.slice().map(r => r.slice())), nextSquares];
     setHistory(nextHistory);
-    setWhiteScores([...whiteScores.slice(0, currentMove + 1), whiteScores[currentMove] + toWhite + whiteIsNext]);
-    setBlackScores([...blackScores.slice(0, currentMove + 1), blackScores[currentMove] + toBlack + !whiteIsNext]);
     setCurrentMove(currentMove + 1);
+    setWhiteScores([...whiteScores.slice(0, currentMove + 1),
+                    whiteScores[currentMove] + toWhite + whiteIsNext]);
+    setBlackScores([...blackScores.slice(0, currentMove + 1), 
+                    blackScores[currentMove] + toBlack + !whiteIsNext]);
     let validMoveAvailable = checkValidMovePossible(nextSquares, whiteIsNext);
     setValidMoveAvailable(validMoveAvailable);
-    setWinner(checkWinner(whiteScores[currentMove] + toWhite + whiteIsNext, blackScores[currentMove] + toBlack + !whiteIsNext));
+    setWinner(checkWinner(whiteScores[currentMove] + toWhite + whiteIsNext, 
+                          blackScores[currentMove] + toBlack + !whiteIsNext));
   }
   
   function forfeitTurn() {
@@ -46,9 +61,9 @@ export default function Game() {
     const nextHistory = [...history.map(g => g.slice().map(r => r.slice())), nextGrid];
     setHistory(nextHistory);
     setCurrentMove(currentMove + 1);
-    setBlackScores([...blackScores, currentBlackScore]);
     setWhiteScores([...whiteScores, currentWhiteScore]);
-    
+    setBlackScores([...blackScores, currentBlackScore]);
+
     let validMoveAvailable = checkValidMovePossible(nextGrid, whiteIsNext);
     setValidMoveAvailable(validMoveAvailable);
     setWinner(checkWinner(currentWhiteScore, currentBlackScore));
@@ -60,8 +75,9 @@ export default function Game() {
     }
     setHistory([...history.slice(0, move + 1).map(r => r.slice())]);
     setCurrentMove(move);
-    setBlackScores([...blackScores.slice(0, currentMove + 1)]);
     setWhiteScores([...whiteScores.slice(0, currentMove + 1)]);
+    setBlackScores([...blackScores.slice(0, currentMove + 1)]);
+
     if (move === 0) {
       setValidMoveAvailable(true);
       setWinner(null);
