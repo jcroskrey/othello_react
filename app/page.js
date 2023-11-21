@@ -146,7 +146,8 @@ export default function Game({optionalInitialGrid, optionalStartingMove}) {
 }
 
 function checkWinner(whiteScore, blackScore) {
-  if (whiteScore + blackScore === 64) {
+  if ((whiteScore + blackScore === 64) || 
+      (whiteScore === 0) || (blackScore === 0)) {
     if (whiteScore > blackScore) {
       return 'white';
     }
