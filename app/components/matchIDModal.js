@@ -6,8 +6,9 @@ export default function MatchIDModal(props) {
 
     function handleSubmit() {
       let matchId = document.getElementById('matchIDInput').value 
-  
-      console.log(matchId);
+      // TODO: validate matchId
+      window.location.pathname = '/match/' + matchId + '/';
+      
     }
   
     return (
@@ -17,31 +18,29 @@ export default function MatchIDModal(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-          <Modal.Header>
+        <Modal.Header>
             <Modal.Title>
-              Type in a Match ID 
+                Type in a Match ID 
             </Modal.Title>
-          </Modal.Header>
-  
-          <Modal.Body>
+        </Modal.Header>
+
+        <Modal.Body>
             <Form.Control
-              type="text"
-              id="matchIDInput"
-              placeholder="Match ID"
+                type="text"
+                id="matchIDInput"
+                placeholder="Match ID"
             />
-  
-          </Modal.Body>
-          
-          <Modal.Footer className="text-center">
+        </Modal.Body>
+        
+        <Modal.Footer className="text-center">
             <Button 
-              variant="outline-info" 
-              type="submit"
-              onClick={() => handleSubmit()}
+                variant="outline-info" 
+                type="submit"
+                onClick={() => handleSubmit()}
             >
-              Join Match
+                Join Match
             </Button>
-          </Modal.Footer>
-  
+        </Modal.Footer>
       </Modal>
     );
   }
