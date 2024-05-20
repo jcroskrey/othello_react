@@ -1,13 +1,22 @@
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
+import { useRouter } from 'next/navigation';
+import { useRef } from "react";
 
 export default function MatchIDModal(props) {
+    const matchId = useRef("");
+    const router = useRouter();
+
+    function handleChange(event) {
+      matchId.current = event.target.value;
+      console.log(matchId.current);
+    }
 
     function handleSubmit() {
       let matchId = document.getElementById('matchIDInput').value 
       // TODO: validate matchId
-      window.location.pathname = '/match/' + matchId + '/';
+      window.location.pathname = '/pvp/';
       
     }
   
@@ -29,17 +38,18 @@ export default function MatchIDModal(props) {
                 type="text"
                 id="matchIDInput"
                 placeholder="Match ID"
+                onChange={(e) => handleChange(e)}
             />
         </Modal.Body>
         
         <Modal.Footer className="text-center">
-            <Button 
-                variant="outline-info" 
-                type="submit"
-                onClick={() => handleSubmit()}
-            >
+              <Button 
+                  variant="outline-info" 
+                  type="submit"
+                  onClick={() => router.push('/pvp?id=' + matchId.current)} 
+              >
                 Join Match
-            </Button>
+              </Button>
         </Modal.Footer>
       </Modal>
     );
