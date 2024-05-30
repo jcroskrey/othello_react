@@ -29,21 +29,21 @@ export default function PvPPage() {
       }[readyState];
 
     return (
-        // <Game></Game>
-        <>
-            <div>
-                <textarea id="chat-log" cols="100" rows="20" value={messageHistory} readOnly></textarea><br/>
-                Match ID is: {matchId}
-            </div>
-            <div>
-            <button
-                onClick={handleClickSendMessage}
-                disabled={readyState !== ReadyState.OPEN}
-            >
-                Click Me to send 'Hello'
-            </button>
-                Connection Status: {connectionStatus}
-            </div>
-        // </>
+        <Game></Game>
+        // <>
+        //     <div>
+        //         <textarea id="chat-log" cols="100" rows="20" value={messageHistory} readOnly></textarea><br/>
+        //         Match ID is: {matchId}
+        //     </div>
+        //     <div>
+        //     <button
+        //         onClick={handleClickSendMessage}
+        //         disabled={readyState !== ReadyState.OPEN}
+        //     >
+        //         Click Me to send 'Hello'
+        //     </button>
+        //         Connection Status: {connectionStatus}
+        //     </div>
+        //  </>
     )
 }
