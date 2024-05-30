@@ -10,7 +10,6 @@ export default function MatchIDModal(props) {
 
     function handleChange(event) {
       matchId.current = event.target.value;
-      console.log(matchId.current);
     }
   
     return (

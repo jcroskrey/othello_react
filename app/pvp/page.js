@@ -30,7 +30,7 @@ export default function PvPPage() {
     return (
         <>
             <div>
-                <textarea id="chat-log" cols="100" rows="20" value={messageHistory}></textarea><br/>
+                <textarea id="chat-log" cols="100" rows="20" value={messageHistory} readOnly></textarea><br/>
                 Match ID is: {matchId}
             </div>
             <div>

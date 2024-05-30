@@ -1,10 +1,10 @@
 body {
   background-color: #212529 !important;
 }
-.container {
+/* .container {
   margin: 0 !important;
   min-width: 100% !important;
-}
+} */
 .board-col {
   display: flex;
   justify-content: center;
@@ -121,4 +121,21 @@ tr, td {
 }
 .tab {
   text-indent: 10%;
+}
+a.btn {
+  /* buttons with <a> tag do not have centered text, have to manually center with css */
+  display: flex;
+  align-items: center;
+}
+.home-selection-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.mode-selection-button {
+  text-align: center !important;
+  width: 15vh;
+  height: 15vh; 
+  margin: 1rem;
 }
