@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useState, useEffect, useCallback } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import Game from '../local/page';
 
 export default function PvPPage() {
     const searchParams = useSearchParams();
@@ -28,6 +29,7 @@ export default function PvPPage() {
       }[readyState];
 
     return (
+        // <Game></Game>
         <>
             <div>
                 <textarea id="chat-log" cols="100" rows="20" value={messageHistory} readOnly></textarea><br/>
@@ -42,6 +44,6 @@ export default function PvPPage() {
             </button>
                 Connection Status: {connectionStatus}
             </div>
-        </>
+        // </>
     )
 }

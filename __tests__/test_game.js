@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/user-event';
 import { render, screen } from "@testing-library/react";
 import { userEvent } from '@testing-library/user-event';
-import Game from '@/app/page';
+import Game from '@/app/components/game';
 
 const generateEmptyGrid = (n) => {
     return Array(n).fill().map(() => Array(n).fill(null));
