@@ -12,13 +12,6 @@ export default function MatchIDModal(props) {
       matchId.current = event.target.value;
       console.log(matchId.current);
     }
-
-    function handleSubmit() {
-      let matchId = document.getElementById('matchIDInput').value 
-      // TODO: validate matchId
-      window.location.pathname = '/pvp/';
-      
-    }
   
     return (
       <Modal
