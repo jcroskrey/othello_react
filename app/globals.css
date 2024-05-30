@@ -123,7 +123,7 @@ tr, td {
   text-indent: 10%;
 }
 a.btn {
-  /* buttons with <a> tag do not have centered text, have to manually center with css */
+  /* buttons with href (<a> tag) do not have centered text, have to manually center with css */
   display: flex;
   align-items: center;
 }
