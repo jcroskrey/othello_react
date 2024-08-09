@@ -138,4 +138,5 @@ a.btn {
   width: 15vh;
   height: 15vh; 
   margin: 1rem;
+  justify-content: center;
 }

@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/user-event';
 import { render, screen } from "@testing-library/react";
 import { userEvent } from '@testing-library/user-event';
-import ControlsCard from '@/app/components/controlsCard';
+import ControlsCard from '@/app/local/components/controlsCard';
 
 
 test("Test undo and reset buttons disabled if first move", () => {

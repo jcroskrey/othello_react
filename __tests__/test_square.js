@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import '@testing-library/user-event';
-import { Square } from "@/app/components/square";
+import { Square } from "@/app/local/components/square";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from '@testing-library/user-event';
 

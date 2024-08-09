@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/user-event';
 import { render, screen } from "@testing-library/react";
 import { userEvent } from '@testing-library/user-event';
-import ScoreCard from '@/app/components/scoreCard';
+import ScoreCard from '@/app/local/components/scoreCard';
 
 
 test("Test scorecard shows correct text on turn and forfeit button invisible", () => {
