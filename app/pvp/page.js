@@ -1,8 +1,10 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, createContext} from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import Game from './components/game';
+
+export const LastMessageContext = createContext(null);
 
 export default function PvPPage() {
     const searchParams = useSearchParams();
@@ -35,12 +37,12 @@ export default function PvPPage() {
 
     return (
         <>
-            <Game
-                handleSendMessage={handleClickSendMessage}>
-                readyState={readyState}
-                messageHistory={messageHistory}
+            <LastMessageContext.Provider value={lastJsonMessage}>
+                <Game
+                    handleSendMessage={handleClickSendMessage}>
 
-            </Game>
+                </Game>
+            </LastMessageContext.Provider>
             <div>
                 <textarea id="chat-log" cols="100" rows="20" value={messageHistory} readOnly></textarea><br />
                 Match ID is: {matchId}

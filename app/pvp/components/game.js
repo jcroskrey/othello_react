@@ -1,11 +1,12 @@
 "use client";
 import { Board } from "./board";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ScoreCard from "./scoreCard";
 import ControlsCard from "./controlsCard";
+import { LastMessageContext } from "../page";
 
 // create the starting grid
 let initialGrid = Array(8).fill().map(() => Array(8).fill(null));
@@ -17,8 +18,6 @@ initialGrid[4][4] = 0;
 
 export default function Game(
   { handleSendMessage,
-    readyState,
-    messageHistory,
     optionalInitialGrid,
     optionalStartingMove }) {
 
@@ -35,6 +34,17 @@ export default function Game(
     startingMove = optionalStartingMove;
   }
   // fill grid with null values (blank spaces)
+  const lastMessage = useContext(LastMessageContext);
+  useEffect( () => {
+    // when we receive a message from the opponent, update the game
+    if (lastMessage !== null) {
+      const gridArray = JSON.parse(lastMessage.grid);
+      const toWhite = JSON.parse(lastMessage.toWhite);
+      const toBlack = JSON.parse(lastMessage.toBlack);
+      handlePlay(gridArray, toWhite, toBlack, true);
+    }
+  }, [lastMessage]);
+
   const [history, setHistory] = React.useState([initialGrid]);  // save a history of each grid
   const [currentMove, setCurrentMove] = React.useState(startingMove);
   const [whiteScores, setWhiteScores] = React.useState([2]);
@@ -46,10 +56,13 @@ export default function Game(
   const currentGrid = history[history.length - 1];
   const currentWhiteScore = whiteScores[currentMove];
   const currentBlackScore = blackScores[currentMove];
+  
 
   // Update state when play is made
-  function handlePlay(nextSquares, toWhite, toBlack) {
-    handleSendMessage(JSON.stringify(nextSquares), toWhite, toBlack)
+  function handlePlay(nextSquares, toWhite, toBlack, receivedPlay) {
+    if (!receivedPlay) {
+      handleSendMessage(JSON.stringify(nextSquares), toWhite, toBlack);
+    }
     const nextHistory = [...history.map(g => g.slice().map(r => r.slice())), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(currentMove + 1);

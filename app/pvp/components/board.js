@@ -16,7 +16,7 @@ export const Board = ({currentGrid, whiteIsNext, onPlay, testId}) => {
       toWhite = whiteIsNext ? validFlips.length : -validFlips.length;
       toBlack = whiteIsNext ? -validFlips.length: validFlips.length;
       makeFlips(nextGrid, validFlips);
-      onPlay(nextGrid, toWhite, toBlack);
+      onPlay(nextGrid, toWhite, toBlack, false);
   }
 
   return (
