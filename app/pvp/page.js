@@ -16,16 +16,21 @@ export default function PvPPage() {
     const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(socketUrl);
 
     useEffect(() => {
-        if (lastJsonMessage !== null) {
+        if (lastJsonMessage !== null && lastJsonMessage.hasOwnProperty('grid')) {
             setMessageHistory(
                 (prev) => prev.concat(lastJsonMessage.grid));
         }
+        else if (lastJsonMessage !== null && lastJsonMessage.hasOwnProperty('signature')) {
+            console.log("Received my signature and team");
+            console.log(lastJsonMessage);
+        };
     }, [lastJsonMessage]);
 
-    const handleClickSendMessage = useCallback((grid, toWhite, toBlack) => sendJsonMessage({ 
+    const handleClickSendMessage = useCallback((grid, toWhite, toBlack, signedBy) => sendJsonMessage({ 
         grid: grid,
         toWhite: toWhite,
         toBlack: toBlack, 
+        signedBy: signedBy,
     }));
     const connectionStatus = {
         [ReadyState.CONNECTING]: 'Connecting',
