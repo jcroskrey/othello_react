@@ -37,10 +37,11 @@ export default function Game(
   const lastMessage = useContext(LastMessageContext);
   useEffect( () => {
     // when we receive a message from the opponent, update the game
-    if (lastMessage !== null) {
+    if (lastMessage !== null && lastMessage.hasOwnProperty('grid')) {
       const gridArray = JSON.parse(lastMessage.grid);
       const toWhite = JSON.parse(lastMessage.toWhite);
       const toBlack = JSON.parse(lastMessage.toBlack);
+      console.log("Message received, executing handle play");
       handlePlay(gridArray, toWhite, toBlack, true);
     }
   }, [lastMessage]);
