@@ -18,6 +18,7 @@ initialGrid[4][4] = 0;
 
 export default function Game(
   { handleSendMessage,
+    team,
     optionalInitialGrid,
     optionalStartingMove }) {
 
@@ -147,6 +148,7 @@ export default function Game(
           <Board
             key={currentMove}
             currentGrid={currentGrid.slice().map(r => r.slice())}
+            team={team}
             whiteIsNext={whiteIsNext}
             onPlay={handlePlay}
             testId={'game_board'}

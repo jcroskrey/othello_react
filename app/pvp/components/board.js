@@ -1,7 +1,14 @@
 import { Square } from './square';
 
-export const Board = ({currentGrid, whiteIsNext, onPlay, testId}) => {
+export const Board = ({currentGrid, team, whiteIsNext, onPlay, testId}) => {
   function handleClick(row, col) {
+    console.log(team, whiteIsNext);
+      if (team != whiteIsNext) {
+          // team is int, whiteIsNext is bool
+          // team == 0 is black, team == 1 is white
+          // if it's not our turn, don't do anything
+          return;
+      }
       const nextGrid = currentGrid.slice();
       if (nextGrid[row][col] !== null) {
           return;

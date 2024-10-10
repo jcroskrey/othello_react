@@ -12,19 +12,24 @@ export default function PvPPage() {
     const socketUrl = "ws://localhost:8000/ws/server/" + matchId + "/"
 
     const [messageHistory, setMessageHistory] = useState([]);
+    const [team, setTeam] = useState(undefined);
 
     const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(socketUrl);
-
     useEffect(() => {
-        if (lastJsonMessage !== null && lastJsonMessage.hasOwnProperty('grid')) {
-            setMessageHistory(
-                (prev) => prev.concat(lastJsonMessage.grid));
+        if (lastJsonMessage !== null) {
+            if (lastJsonMessage.hasOwnProperty('grid')) {
+                setMessageHistory(
+                    (prev) => prev.concat(lastJsonMessage.grid));
+                }
+            else if (lastJsonMessage.hasOwnProperty('signature')) {
+                // we only receive team when initally joining match
+                console.log("Received my signature and team");
+                console.log(lastJsonMessage);
+                setTeam(lastJsonMessage.isClientA ? 0 : 1); // 0 is team black, 1 is team white
+            }
         }
-        else if (lastJsonMessage !== null && lastJsonMessage.hasOwnProperty('signature')) {
-            console.log("Received my signature and team");
-            console.log(lastJsonMessage);
-        };
     }, [lastJsonMessage]);
+    
 
     const handleClickSendMessage = useCallback((grid, toWhite, toBlack, signedBy) => sendJsonMessage({ 
         grid: grid,
@@ -44,7 +49,10 @@ export default function PvPPage() {
         <>
             <LastMessageContext.Provider value={lastJsonMessage}>
                 <Game
-                    handleSendMessage={handleClickSendMessage}>
+                    handleSendMessage={handleClickSendMessage}
+                    team={team}
+                >
+                    
 
                 </Game>
             </LastMessageContext.Provider>
