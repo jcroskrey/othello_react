@@ -116,7 +116,7 @@ export default function Game(
       <Row>
         <Col className="scores-col">
           <Row>
-            <Col className="black-score-col">
+            <Col className="score-col-pvp">
               <ScoreCard
                 team={"Black"}
                 score={currentBlackScore}
@@ -125,20 +125,6 @@ export default function Game(
                 forfeitTurn={() => forfeitTurn()}
                 winner={winner}
                 testId={'black_scorecard'}
-              />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col className="white-score-col">
-              <ScoreCard
-                team={"White"}
-                score={currentWhiteScore}
-                whiteIsNext={whiteIsNext}
-                validMoveAvailable={validMoveAvailable}
-                forfeitTurn={() => forfeitTurn()}
-                winner={winner}
-                testId={'white_scorecard'}
               />
             </Col>
           </Row>
@@ -154,15 +140,22 @@ export default function Game(
             testId={'game_board'}
           />
         </Col>
-        <Col className="controls-col">
-          <ControlsCard
-            currentMove={currentMove}
-            goToMove={jumpTo}
-            winner={winner}
-            testId={'controls_card'}
-          />
-        </Col>
-      </Row>
+        <Col className="scores-col">
+          <Row>
+            <Col className="score-col-pvp">
+              <ScoreCard
+                team={"White"}
+                score={currentWhiteScore}
+                whiteIsNext={whiteIsNext}
+                validMoveAvailable={validMoveAvailable}
+                forfeitTurn={() => forfeitTurn()}
+                winner={winner}
+                testId={'white_scorecard'}
+              />
+            </Col>
+          </Row>
+      </Col>
+    </Row>
 
     </Container>
   );

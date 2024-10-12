@@ -86,6 +86,17 @@ tr, td {
   flex-direction: column;
   justify-content: flex-end;
 }
+.score-col-pvp {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.scorecard-pvp {
+  max-height: calc(526px / 2);
+  width: inherit;
+}
+
 .white-scorecard {
   max-height: calc(526px / 2);
   width: inherit;

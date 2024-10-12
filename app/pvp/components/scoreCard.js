@@ -12,7 +12,7 @@ export default function ScoreCard({
     testId
     }) {
 
-    let styling = 'text-center ' + team.toLowerCase() + '-scorecard';
+    let styling = 'text-center scorecard-pvp';
 
     // Set the card outline based on turn
     let turnOutline = '';
