@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-export const Square = ({value, onSquareClick, whiteIsNext, testId}) => {
+export const Square = ({value, onSquareClick, team, testId}) => {
+    const hoverColor = team === 1 ? 'white-hover' : 'black-hover'; 
     const [hoverValue, setHoverValue] = useState('');
 
     function handleMouseEnter() {
@@ -8,23 +9,14 @@ export const Square = ({value, onSquareClick, whiteIsNext, testId}) => {
         // only apply hover effect to empty cells
         return;
       }
-      else {
-        if (whiteIsNext) {
-          setHoverValue('white-hover');
-        }
-        else {
-          setHoverValue('black-hover');
-        }
-      }
+      setHoverValue(hoverColor);
     }
 
     function handleMouseLeave() {
       if (value !== '') {
         return;
       }
-      else {
-        setHoverValue('');
-      }
+      setHoverValue('');
     }
 
     return (

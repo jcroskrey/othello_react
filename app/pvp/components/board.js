@@ -40,7 +40,7 @@ export const Board = ({currentGrid, team, whiteIsNext, onPlay, testId}) => {
                     key={i+"_"+j}
                     value={color_}
                     onSquareClick={() => handleClick(i, j)}
-                    whiteIsNext={whiteIsNext}
+                    team={team}
                     testId={i+"_"+j}
                   />
                 )
