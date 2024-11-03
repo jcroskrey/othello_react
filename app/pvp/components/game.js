@@ -118,7 +118,8 @@ export default function Game(
           <Row>
             <Col className="score-col-pvp">
               <ScoreCard
-                team={"Black"}
+                teamColor={"Black"}
+                team={team}
                 score={currentBlackScore}
                 whiteIsNext={whiteIsNext}
                 validMoveAvailable={validMoveAvailable}
@@ -144,7 +145,8 @@ export default function Game(
           <Row>
             <Col className="score-col-pvp">
               <ScoreCard
-                team={"White"}
+                teamColor={"White"}
+                team={team}
                 score={currentWhiteScore}
                 whiteIsNext={whiteIsNext}
                 validMoveAvailable={validMoveAvailable}
