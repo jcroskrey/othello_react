@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const Square = ({value, onSquareClick, team, testId}) => {
-    const hoverColor = team === 1 ? 'white-hover' : 'black-hover'; 
+    const hoverColor = team === 0 ? 'white-hover' : 'black-hover'; 
     const [hoverValue, setHoverValue] = useState('');
 
     function handleMouseEnter() {
